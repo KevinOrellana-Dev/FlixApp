@@ -22,7 +22,7 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 ### App Walkthough GIF
 
-<img src="https://recordit.co/A4itDoI56F#" width=250><br>
+<img src="http://g.recordit.co/A4itDoI56F.gif" width=250><br>
 
 ### Notes
 I am struggling understanding how the API works. Also I am still working on understanding how to correctly program table views. However, I belive that with some practice I will understand these topics.  
