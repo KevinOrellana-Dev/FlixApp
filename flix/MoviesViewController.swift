@@ -35,15 +35,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
            } else if let data = data {
               let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
             
+            // TODO: Get the array of movies
+             // TODO: Store the movies in a property to use elsewhere
+             // TODO: Reload your table view data
+
             self.movies = dataDictionary["results"] as! [[String:Any]]
             
             self.tableView.reloadData() // calls the buttom functions again
             print(dataDictionary)
             
-              // TODO: Get the array of movies
-              // TODO: Store the movies in a property to use elsewhere
-              // TODO: Reload your table view data
-
+            
+         
            }
         }
         task.resume()
@@ -77,6 +79,24 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
 
-   
+   //this is called when you are leaving the current view controller and preparing for the new view controller
+    //sender is the cell that was tapped on
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //we need to find the selected movie
+        
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let movie = movies[indexPath.row]
+        
+        //pass the selected movie to the details view controller
+        
+        let detailsViewController = segue.destination as! MovieDetailsViewController //by casting, we will be able to access the view's properties.
+        detailsViewController.movie = movie //passing data
+        
+        tableView.deselectRow(at: indexPath, animated: true)//deselects the cell when transeferring to new view controller
+        
+        
+        
+    }
 
 }
