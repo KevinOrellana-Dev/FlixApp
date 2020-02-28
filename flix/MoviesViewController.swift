@@ -42,7 +42,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             self.movies = dataDictionary["results"] as! [[String:Any]]
             
             self.tableView.reloadData() // calls the buttom functions again
-            print(dataDictionary)
+
             
             
          
