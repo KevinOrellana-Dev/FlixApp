@@ -21,6 +21,15 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        
+        let layout =  collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        
+        layout.minimumLineSpacing = 4 // controls the space in between the rows
+        layout.minimumInteritemSpacing = 4
+        let width = (view.frame.size.width - layout.minimumInteritemSpacing * 2) / 3
+        
+        layout.itemSize = CGSize(width: width, height: width * 3 / 2)// changes depending of the phone
+        
         let url = URL(string: "https://api.themoviedb.org/3/movie/297762/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -31,13 +40,10 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
            } else if let data = data {
               let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
             
-            // TODO: Get the array of movies
-             // TODO: Store the movies in a property to use elsewhere
-             // TODO: Reload your table view data
 
             self.movies = dataDictionary["results"] as! [[String:Any]]
             
-            print(self.movies)
+ 
             
             self.collectionView.reloadData()
             
@@ -69,14 +75,6 @@ class MovieGridViewController: UIViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
